@@ -12,13 +12,13 @@ export default StyleSheet.create({
   mainContainer: {flex: 1, alignItems: 'center'},
   customButton: {
     backgroundColor: '#43bfc1',
-    width: '88%',
+    width: '100%',
     height: 60,
     justifyContent: 'center',
   },
   customButtonText: {
     color: '#fff',
-    fontSize: 24,
+    fontSize: 22,
   },
   h1: {
     fontSize: totalSize(3),
@@ -28,6 +28,7 @@ export default StyleSheet.create({
     fontSize: totalSize(3.5),
   },
   innerContainer: {
+    backgroundColor: 'red',
     marginLeft: 32,
   },
   p1: {

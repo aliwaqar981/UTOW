@@ -7,7 +7,7 @@ import {RegisterButton} from '../../Components/RegisterButton';
 export const VerifyEmail = props => {
   const [email, setEmail] = useState('');
   return (
-    <View style={[ApplicationStyles.innerContainer, {marginTop: 32}]}>
+    <View style={[ApplicationStyles.bgContainer, {paddingHorizontal: 32}]}>
       <Text style={ApplicationStyles.boldText}>Email address</Text>
       <View style={styles.emailContainer}>
         <TextInput
@@ -37,10 +37,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '90%',
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.3,
   },
   emailInput: {
-    marginLeft: 5,
     fontSize: 18,
     borderBottomColor: 'gray',
   },

@@ -17,53 +17,46 @@ export const PhoneNumber = props => {
     console.log(country, countryCode);
   };
   return (
-    <View style={ApplicationStyles.bgContainer}>
-      <View style={ApplicationStyles.innerContainer}>
-        <Text style={ApplicationStyles.h1}>Enter mobile number</Text>
-        <View style={styles.countryPicker}>
-          <View style={styles.countryPickerContainer}>
-            <CountryPicker
-              {...{
-                countryCode,
-                onSelect,
-              }}
-              visible={false}
-            />
-            <Image
-              source={require('../../Assets/Images/downArrow.png')}
-              height={20}
-              width={20}
-            />
-            <TextInput
-              style={{
-                marginLeft: 5,
-                fontSize: 18,
-              }}
-              onChangeText={text => setPhoneNumber(text)}
-              keyboardType="phone-pad"
-            />
-          </View>
+    <View style={[ApplicationStyles.bgContainer, {paddingHorizontal: 32}]}>
+      {/* <View style={ApplicationStyles.innerContainer}> */}
+      <Text style={ApplicationStyles.h1}>Enter mobile number</Text>
+      <View style={styles.countryPicker}>
+        <View style={styles.countryPickerContainer}>
+          <CountryPicker
+            {...{
+              countryCode,
+              onSelect,
+            }}
+            visible={false}
+          />
           <Image
-            source={require('../../Assets/Images/tick.png')}
+            source={require('../../Assets/Images/downArrow.png')}
             height={20}
             width={20}
           />
+          <TextInput
+            style={styles.phoneInput}
+            onChangeText={text => setPhoneNumber(text)}
+            keyboardType="phone-pad"
+          />
         </View>
-        <Text style={styles.termsConditions}>
-          By Continuing, I confirm that I have read {'&'} agreed to the{' '}
-          <Text style={ApplicationStyles.boldText}>Terms </Text>
-          {'&'} <Text style={ApplicationStyles.boldText}>conditions </Text> and
-          <Text style={ApplicationStyles.boldText}> Privacy policy </Text>
-        </Text>
+        <Image
+          source={require('../../Assets/Images/tick.png')}
+          height={20}
+          width={20}
+        />
       </View>
+      <Text style={styles.termsConditions}>
+        By Continuing, I confirm that I have read {'&'} agreed to the{' '}
+        <Text style={ApplicationStyles.boldText}>Terms </Text>
+        {'&'} <Text style={ApplicationStyles.boldText}>conditions </Text> and
+        <Text style={ApplicationStyles.boldText}> Privacy policy </Text>
+      </Text>
+      {/* </View> */}
       <RegisterButton
         title="Continue"
         onPress={() => navigate('otp', {phoneNumber})}
-        styles={{
-          alignItems: 'center',
-          marginTop: 60,
-          alignSelf: 'center',
-        }}
+        styles={styles.buttonStyles}
       />
     </View>
   );
@@ -83,6 +76,16 @@ const styles = StyleSheet.create({
     width: '90%',
     textAlign: 'center',
     fontSize: 11,
-    marginTop: 16,
+    marginTop: 12,
+  },
+  buttonStyles: {
+    alignItems: 'center',
+    marginTop: 60,
+    alignSelf: 'center',
+  },
+  phoneInput: {
+    marginLeft: 5,
+    fontSize: 18,
+    width: '75%',
   },
 });
