@@ -1,6 +1,6 @@
+import {BookingDetails, TruckArrive, TruckOnWay} from '../../Components/';
 import {Image, Picker, Text, View} from 'react-native';
 import React, {useState} from 'react';
-import {TruckArrive, TruckOnWay} from '../../Components/';
 import {height, totalSize, width} from 'react-native-dimension';
 
 import ApplicationStyles from '../../Themes/ApplicationStyles';
@@ -9,8 +9,9 @@ import ModalDropdown from 'react-native-modal-dropdown';
 
 export const MapScreen = props => {
   const [selected, setSelected] = useState('Jump Start');
-  const [arriveVisible, setArriveVisible] = useState(true);
+  const [arriveVisible, setArriveVisible] = useState(false);
   const [onWayVisible, setOnWayVisible] = useState(false);
+  const [bookingDetailsVisible, setBookingDetailsVisible] = useState(true);
   const handleSelected = (itemValue, itemIndex) => {
     console.log('Check item', itemValue);
     setSelected(itemValue);
@@ -35,21 +36,8 @@ export const MapScreen = props => {
           />
         </MapView.Marker>
       </MapView>
-      <View style={ApplicationStyles.cardStyles}>
+      {/* <View style={ApplicationStyles.cardStyles}>
         <Text style={ApplicationStyles.h3}>Choose Your Service</Text>
-        {/* <Picker
-          mode="dropdown"
-          selectedValue={selected}
-          style={{
-            height: 40,
-            width: '90%',
-            backgroundColor: 'green',
-            marginTop: 8,
-          }}
-          onValueChange={(itemValue, itemIndex) => handleSelected}>
-          <Picker.Item label="Java" value="java" />
-          <Picker.Item label="JavaScript" value="js" />
-        </Picker> */}
         <ModalDropdown
           style={{
             height: 40,
@@ -76,12 +64,17 @@ export const MapScreen = props => {
             'Tire Change',
           ]}
         />
-      </View>
+      </View> */}
       <TruckArrive
         visible={arriveVisible}
         setVisible={visible => setArriveVisible(visible)}
       />
       <TruckOnWay visible={onWayVisible} setVisible={setOnWayVisible} />
+      <BookingDetails
+        visible={bookingDetailsVisible}
+        driverName={'John Turner'}
+        selectedService={{name: 'Jump Start', rate: '200'}}
+      />
     </View>
   );
 };

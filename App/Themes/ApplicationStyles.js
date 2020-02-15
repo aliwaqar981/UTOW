@@ -24,6 +24,10 @@ export default StyleSheet.create({
     backgroundColor: '#c1c1c1',
     width: '80%',
   },
+  dividerStyles1: {
+    backgroundColor: '#c1c1c1',
+    width: '100%',
+  },
   h1: {
     fontSize: totalSize(3),
     fontWeight: 'bold',
@@ -34,12 +38,23 @@ export default StyleSheet.create({
   h3: {
     fontSize: totalSize(2),
   },
+  h4: {
+    fontSize: totalSize(2),
+    fontWeight: 'bold',
+  },
   innerContainer: {
     backgroundColor: 'red',
     marginLeft: 32,
   },
   p1: {
+    fontSize: 24,
+  },
+  p2: {
     fontSize: 15,
+  },
+  rateFont: {
+    fontSize: 18,
+    color: '#282f39',
   },
   profileNameText: {
     fontSize: 17,

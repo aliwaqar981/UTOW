@@ -21,7 +21,7 @@ export const AuthHome = props => {
       </Text>
       <Text
         style={[
-          ApplicationStyles.p1,
+          ApplicationStyles.p2,
           {marginHorizontal: 32, width: width(70)},
         ]}>
         Whether you're headed to work, airport or out of the town. UTOW connects
