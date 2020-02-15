@@ -9,8 +9,8 @@ import ModalDropdown from 'react-native-modal-dropdown';
 
 export const MapScreen = props => {
   const [selected, setSelected] = useState('Jump Start');
-  const [arriveVisible, setArriveVisible] = useState(false);
-  const [onWayVisible, setOnWayVisible] = useState(true);
+  const [arriveVisible, setArriveVisible] = useState(true);
+  const [onWayVisible, setOnWayVisible] = useState(false);
   const handleSelected = (itemValue, itemIndex) => {
     console.log('Check item', itemValue);
     setSelected(itemValue);

@@ -68,4 +68,13 @@ export default StyleSheet.create({
     height: '16%',
     padding: totalSize(3),
   },
+  mediumModalStyles: {
+    height: '32%',
+    width: '100%',
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

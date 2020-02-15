@@ -24,7 +24,7 @@ export const TruckOnWay = props => {
       hasBackdrop={false}
       deviceWidth={Dimensions.get('window').width}
       style={{margin: 0}}>
-      <View style={styles.container}>
+      <View style={ApplicationStyles.mediumModalStyles}>
         <View style={styles.imageContainer}>
           <Text style={ApplicationStyles.boldText}>15 min</Text>
           <Image
@@ -59,15 +59,7 @@ export const TruckOnWay = props => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    height: '32%',
-    width: '100%',
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  container: {},
   imageContainer: {
     width: '100%',
     flexDirection: 'row',
