@@ -20,12 +20,19 @@ export default StyleSheet.create({
     color: '#fff',
     fontSize: 22,
   },
+  dividerStyles: {
+    backgroundColor: '#c1c1c1',
+    width: '80%',
+  },
   h1: {
     fontSize: totalSize(3),
     fontWeight: 'bold',
   },
   h2: {
     fontSize: totalSize(3.5),
+  },
+  h3: {
+    fontSize: totalSize(2),
   },
   innerContainer: {
     backgroundColor: 'red',
@@ -34,9 +41,31 @@ export default StyleSheet.create({
   p1: {
     fontSize: 15,
   },
+  profileNameText: {
+    fontSize: 17,
+    color: '#43bfc1',
+    fontWeight: 'bold',
+  },
+  profileImageStyle: {
+    width: totalSize(10),
+    height: totalSize(10),
+    borderRadius: 80,
+    marginTop: 16,
+  },
   registerButtonContainer: {
     flex: 1,
     justifyContent: 'flex-end',
     marginBottom: 20,
+  },
+  cardStyles: {
+    marginVertical: height(2),
+    marginHorizontal: width(5),
+    backgroundColor: '#fff',
+    elevation: 10,
+    position: 'absolute',
+    top: 60,
+    width: '90%',
+    height: '16%',
+    padding: totalSize(3),
   },
 });

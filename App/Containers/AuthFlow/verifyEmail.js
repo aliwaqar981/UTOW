@@ -6,6 +6,8 @@ import {RegisterButton} from '../../Components/RegisterButton';
 
 export const VerifyEmail = props => {
   const [email, setEmail] = useState('');
+  const navigate = props.navigation.navigate;
+
   return (
     <View style={[ApplicationStyles.bgContainer, {paddingHorizontal: 32}]}>
       <Text style={ApplicationStyles.boldText}>Email address</Text>
@@ -24,7 +26,7 @@ export const VerifyEmail = props => {
       </View>
       <RegisterButton
         title="Verify Email"
-        onPress={() => null}
+        onPress={() => navigate('mapScreen')}
         styles={{alignItems: 'center', marginTop: 60, alignSelf: 'center'}}
       />
     </View>
