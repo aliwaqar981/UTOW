@@ -20,7 +20,7 @@ const otherServices = [
 ];
 
 export const DriverDetails = props => {
-  const {visible, setVisible, driverName, selectedService} = props;
+  const {visible, handleDriverDetails, driverName, selectedService} = props;
   return (
     <Modal
       isVisible={visible}
@@ -29,7 +29,7 @@ export const DriverDetails = props => {
       deviceWidth={Dimensions.get('window').width}
       style={{margin: 0}}>
       <View style={[ApplicationStyles.mediumModalStyles, styles.container]}>
-        <TouchableOpacity onPress={() => setVisible(false)}>
+        <TouchableOpacity onPress={() => handleDriverDetails()}>
           <Image
             style={{marginTop: 10, width: 50, height: 50}}
             source={require('../../Assets/Images/awesome-down-arrow.png')}
@@ -88,7 +88,11 @@ export const DriverDetails = props => {
           <Text style={{fontWeight: 'bold'}}>$10</Text>
         </View>
         <View style={{width: '90%', alignItems: 'center'}}>
-          <RegisterButton title="Book Me" styles={{alignItems: 'center'}} />
+          <RegisterButton
+            title="Book Me"
+            styles={{alignItems: 'center'}}
+            onPress={handleDriverDetails}
+          />
         </View>
       </View>
     </Modal>

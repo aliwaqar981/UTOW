@@ -1,4 +1,6 @@
 import {
+  CancelTrip,
+  CancelTripConfirmation,
   DriverBooked,
   DriverDetails,
   Feedback,
@@ -14,26 +16,68 @@ import MapView from 'react-native-maps';
 import ModalDropdown from 'react-native-modal-dropdown';
 
 export const MapScreen = props => {
+  // To save reason which service have been selected
   const [selected, setSelected] = useState('Jump Start');
+  // To save reason why trip has been cancelled
+  const [cancelReason, setCancelReason] = useState('');
+  // States of all modals visibility
   const [arriveVisible, setArriveVisible] = useState(false);
   const [driverBookedVisible, setDriverBookedVisible] = useState(false);
-  const [driverDetailsVisible, setDriverDetailsVisible] = useState(false);
-  const [feedbackVisible, setFeedbackVisible] = useState(true);
+  const [driverDetailsVisible, setDriverDetailsVisible] = useState(true);
+  const [feedbackVisible, setFeedbackVisible] = useState(false);
   const [thankyouVisible, setThankyouVisible] = useState(false);
+  const [cancelTripVisible, setcancelTripVisible] = useState(false);
+  const [cancelTripConfirmVisible, setCancelTripConfirmVisible] = useState(
+    false,
+  );
   const handleSelected = (itemValue, itemIndex) => {
-    console.log('Check item', itemValue);
     setSelected(itemValue);
   };
 
-  const handleDriverDetails = visible => {
-    console.log('Check visible', visible);
-    setDriverDetailsVisible(visible);
+  const handleDriverDetails = () => {
+    setDriverDetailsVisible(!driverDetailsVisible);
     setDriverBookedVisible(!driverBookedVisible);
+  };
+
+  const handleBookedVisibility = () => {
+    setDriverBookedVisible(!driverBookedVisible);
+    setArriveVisible(!arriveVisible);
+  };
+  const handleArrivedVisibility = () => {
+    setArriveVisible(!arriveVisible);
+    setFeedbackVisible(!feedbackVisible);
   };
 
   const handleFeedback = () => {
     setFeedbackVisible(!feedbackVisible);
     setThankyouVisible(!thankyouVisible);
+  };
+
+  const handleThankyou = () => {
+    setThankyouVisible(!thankyouVisible);
+  };
+
+  // Callback which will be called if user wants to cancel trip after booking
+  const handleCancelTrip = () => {
+    setDriverBookedVisible(!driverBookedVisible);
+    setcancelTripVisible(!cancelTripVisible);
+  };
+
+  // Callback to get reason which user selects during cancellation trip
+  const handleDoneCancellation = reason => {
+    setCancelReason(reason);
+    // setCancelTripConfirmVisible(!cancelTripConfirmVisible);
+  };
+
+  // Callback triggered if trip cancellation confirmed
+  const handleConfirmedCancellation = () => {
+    setCancelTripConfirmVisible(!cancelTripConfirmVisible);
+  };
+
+  // Callback triggered if trip cancellation not confirmed
+  const handleNotConfirmedCancellation = () => {
+    setCancelTripConfirmVisible(!cancelTripConfirmVisible);
+    setCancelReason('');
   };
   return (
     <View style={ApplicationStyles.bgContainer}>
@@ -86,20 +130,27 @@ export const MapScreen = props => {
       </View> */}
       <TruckArrive
         visible={arriveVisible}
-        setVisible={visible => setArriveVisible(visible)}
+        handleArrivedVisibility={handleArrivedVisibility}
       />
       <DriverBooked
         visible={driverBookedVisible}
-        setVisible={setDriverBookedVisible}
+        handleBookedVisibility={handleBookedVisibility}
+        handleCancelTrip={handleCancelTrip}
       />
       <DriverDetails
         visible={driverDetailsVisible}
-        setVisible={handleDriverDetails}
+        handleDriverDetails={handleDriverDetails}
         driverName={'John Turner'}
         selectedService={{name: 'Jump Start', rate: '200'}}
       />
       <Feedback visible={feedbackVisible} setVisible={handleFeedback} />
-      <Thankyou visible={thankyouVisible} setVisible={setThankyouVisible} />
+      <Thankyou visible={thankyouVisible} setVisible={handleThankyou} />
+      <CancelTrip visible={cancelTripVisible} onDone={handleDoneCancellation} />
+      <CancelTripConfirmation
+        visible={cancelTripConfirmVisible}
+        onCancellationConfirmed={handleConfirmedCancellation}
+        onCancellationNotConfirmed={handleNotConfirmedCancellation}
+      />
     </View>
   );
 };
