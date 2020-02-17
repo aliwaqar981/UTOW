@@ -1,4 +1,10 @@
-import {BookingDetails, TruckArrive, TruckOnWay} from '../../Components/';
+import {
+  DriverBooked,
+  DriverDetails,
+  Feedback,
+  Thankyou,
+  TruckArrive,
+} from '../../Components/';
 import {Image, Picker, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {height, totalSize, width} from 'react-native-dimension';
@@ -10,11 +16,24 @@ import ModalDropdown from 'react-native-modal-dropdown';
 export const MapScreen = props => {
   const [selected, setSelected] = useState('Jump Start');
   const [arriveVisible, setArriveVisible] = useState(false);
-  const [onWayVisible, setOnWayVisible] = useState(false);
-  const [bookingDetailsVisible, setBookingDetailsVisible] = useState(true);
+  const [driverBookedVisible, setDriverBookedVisible] = useState(false);
+  const [driverDetailsVisible, setDriverDetailsVisible] = useState(false);
+  const [feedbackVisible, setFeedbackVisible] = useState(true);
+  const [thankyouVisible, setThankyouVisible] = useState(false);
   const handleSelected = (itemValue, itemIndex) => {
     console.log('Check item', itemValue);
     setSelected(itemValue);
+  };
+
+  const handleDriverDetails = visible => {
+    console.log('Check visible', visible);
+    setDriverDetailsVisible(visible);
+    setDriverBookedVisible(!driverBookedVisible);
+  };
+
+  const handleFeedback = () => {
+    setFeedbackVisible(!feedbackVisible);
+    setThankyouVisible(!thankyouVisible);
   };
   return (
     <View style={ApplicationStyles.bgContainer}>
@@ -69,12 +88,18 @@ export const MapScreen = props => {
         visible={arriveVisible}
         setVisible={visible => setArriveVisible(visible)}
       />
-      <TruckOnWay visible={onWayVisible} setVisible={setOnWayVisible} />
-      <BookingDetails
-        visible={bookingDetailsVisible}
+      <DriverBooked
+        visible={driverBookedVisible}
+        setVisible={setDriverBookedVisible}
+      />
+      <DriverDetails
+        visible={driverDetailsVisible}
+        setVisible={handleDriverDetails}
         driverName={'John Turner'}
         selectedService={{name: 'Jump Start', rate: '200'}}
       />
+      <Feedback visible={feedbackVisible} setVisible={handleFeedback} />
+      <Thankyou visible={thankyouVisible} setVisible={setThankyouVisible} />
     </View>
   );
 };

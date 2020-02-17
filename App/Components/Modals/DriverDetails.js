@@ -19,7 +19,7 @@ const otherServices = [
   {name: 'Low Fuel', rate: '200'},
 ];
 
-export const BookingDetails = props => {
+export const DriverDetails = props => {
   const {visible, setVisible, driverName, selectedService} = props;
   return (
     <Modal
@@ -29,7 +29,7 @@ export const BookingDetails = props => {
       deviceWidth={Dimensions.get('window').width}
       style={{margin: 0}}>
       <View style={[ApplicationStyles.mediumModalStyles, styles.container]}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setVisible(false)}>
           <Image
             style={{marginTop: 10, width: 50, height: 50}}
             source={require('../../Assets/Images/awesome-down-arrow.png')}

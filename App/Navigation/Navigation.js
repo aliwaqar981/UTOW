@@ -46,7 +46,7 @@ const StackSwitcher = createSwitchNavigator(
     Main: MainStack,
   },
   {
-    initialRouteName: 'Main',
+    initialRouteName: 'Auth',
   },
 );
 

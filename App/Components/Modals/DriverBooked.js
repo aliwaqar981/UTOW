@@ -15,7 +15,7 @@ import Modal from 'react-native-modal';
 import React from 'react';
 import {totalSize} from 'react-native-dimension';
 
-export const TruckOnWay = props => {
+export const DriverBooked = props => {
   const {visible, setVisible} = props;
   return (
     <Modal

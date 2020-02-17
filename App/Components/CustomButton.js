@@ -4,10 +4,10 @@ import React from 'react';
 import {totalSize} from 'react-native-dimension';
 
 export const CustomButton = props => {
-  const {title, onPress} = props;
+  const {title, onPress, style, textStyle} = props;
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
-      <Text style={styles.textStyle}>{title}</Text>
+    <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
+      <Text style={[styles.textStyle, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 };
