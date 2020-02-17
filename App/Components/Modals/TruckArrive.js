@@ -7,7 +7,7 @@ import Modal from 'react-native-modal';
 import React from 'react';
 
 export const TruckArrive = props => {
-  const {visible, setVisible} = props;
+  const {visible, handleArrivedVisibility} = props;
   return (
     <Modal
       isVisible={visible}
@@ -28,7 +28,7 @@ export const TruckArrive = props => {
         <Divider style={ApplicationStyles.dividerStyles} />
         <CustomButton
           title="Your truck is here"
-          onPress={() => setVisible(!visible)}
+          onPress={handleArrivedVisibility}
         />
       </View>
     </Modal>

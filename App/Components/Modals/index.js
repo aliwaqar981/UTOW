@@ -3,4 +3,5 @@ export * from './DriverBooked';
 export * from './DriverDetails';
 export * from './Feedback';
 export * from './Thankyou';
-export * from './CancelBooking';
+export * from './CancelTripConfirmation';
+export * from './CancelTrip';

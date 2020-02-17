@@ -52,6 +52,10 @@ export default StyleSheet.create({
   p2: {
     fontSize: 15,
   },
+  p3: {
+    fontSize: 14,
+    fontWeight: '700',
+  },
   rateFont: {
     fontSize: 18,
     color: '#282f39',
@@ -83,6 +87,16 @@ export default StyleSheet.create({
     height: '16%',
     padding: totalSize(3),
   },
+  fullModalStyles: {
+    height: '100%',
+    width: '100%',
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: 'white',
+    padding: '5%',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+  },
   mediumModalStyles: {
     height: '32%',
     width: '100%',
@@ -91,5 +105,39 @@ export default StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  customButtonContainer: {
+    width: 200,
+    height: 40,
+    backgroundColor: '#43bfc1',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: totalSize(5),
+    marginTop: 16,
+  },
+  NoButtonStyles: {
+    fontSize: 14,
+    color: '#7f7f7f',
+    fontWeight: '600',
+  },
+  cancelBookingText: {
+    color: '#282f39',
+    fontSize: 18,
+    fontWeight: '800',
+  },
+  primaryButtonStyle: {
+    fontSize: 14,
+    color: '#ffffff',
+    fontWeight: '600',
+  },
+  activeText: {
+    fontSize: 16,
+    color: '#43bfc1',
+    fontWeight: '400',
+  },
+  passiveText: {
+    fontSize: 16,
+    color: '#7f7f7f',
+    fontWeight: '400',
   },
 });

@@ -16,7 +16,7 @@ import React from 'react';
 import {totalSize} from 'react-native-dimension';
 
 export const DriverBooked = props => {
-  const {visible, setVisible} = props;
+  const {visible, handleBookedVisibility, handleCancelTrip} = props;
   return (
     <Modal
       isVisible={visible}
@@ -40,7 +40,9 @@ export const DriverBooked = props => {
         </Text>
         <Divider style={ApplicationStyles.dividerStyles} />
         <View style={styles.bottomContainer}>
-          <TouchableOpacity style={styles.manageBookingContainer}>
+          <TouchableOpacity
+            style={styles.manageBookingContainer}
+            onPress={handleBookedVisibility}>
             <Image
               style={{width: 20, height: 20}}
               source={require('../../Assets/Images/message.png')}
@@ -48,7 +50,8 @@ export const DriverBooked = props => {
             <Text style={{marginTop: 16}}>Message</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.manageBookingContainer, {marginLeft: 16}]}>
+            style={[styles.manageBookingContainer, {marginLeft: 16}]}
+            onPress={handleCancelTrip}>
             <Icon size={20} name="close" />
             <Text style={{marginTop: 16}}>Cancel Booking</Text>
           </TouchableOpacity>
