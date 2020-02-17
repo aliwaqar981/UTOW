@@ -26,7 +26,7 @@ export const VerifyEmail = props => {
       </View>
       <RegisterButton
         title="Verify Email"
-        onPress={() => navigate('bookings')}
+        onPress={() => navigate('mapScreen')}
         styles={{alignItems: 'center', marginTop: 60, alignSelf: 'center'}}
       />
     </View>
