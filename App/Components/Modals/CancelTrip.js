@@ -1,8 +1,16 @@
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Divider, ListItem} from 'react-native-elements';
 import React, {useState} from 'react';
 
 import ApplicationStyles from '../../Themes/ApplicationStyles';
+import {CancelTripConfirmation} from '../Modals';
 import {CustomButton} from '../CustomButton';
 import Modal from 'react-native-modal';
 import {height} from 'react-native-dimension';
@@ -17,8 +25,22 @@ const reasons = [
   "Don't charge rider",
 ];
 export const CancelTrip = props => {
-  const {visible, onDone} = props;
+  const {visible, onDone, handleCrossButton} = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [cancelTripConfirmVisible, setCancelTripConfirmVisible] = useState(
+    false,
+  );
+  const handleCancelButton = () => {
+    setCancelTripConfirmVisible(!cancelTripConfirmVisible);
+  };
+  const handleConfirmedCancellation = () => {
+    onDone(selectedIndex);
+    setCancelTripConfirmVisible(!cancelTripConfirmVisible);
+  };
+
+  const handleDoneButton = () => {
+    setCancelTripConfirmVisible(!cancelTripConfirmVisible);
+  };
   return (
     <Modal
       isVisible={visible}
@@ -28,7 +50,9 @@ export const CancelTrip = props => {
       style={{margin: 0}}>
       <View style={ApplicationStyles.fullModalStyles}>
         <View style={styles.headerContainer}>
-          <Image source={require('../../Assets/Images/close.png')} />
+          <TouchableOpacity onPress={handleCrossButton}>
+            <Image source={require('../../Assets/Images/close.png')} />
+          </TouchableOpacity>
           <Text style={ApplicationStyles.cancelBookingText}>Cancel Trip</Text>
         </View>
         {reasons.map((item, index) => {
@@ -51,11 +75,16 @@ export const CancelTrip = props => {
         })}
         <CustomButton
           title="Done"
-          onPress={() => onDone(reasons[selectedIndex])}
+          onPress={handleDoneButton}
           style={[styles.doneButton, {width: '90%', height: height(5.5)}]}
           textStyle={ApplicationStyles.primaryButtonStyle}
         />
       </View>
+      <CancelTripConfirmation
+        visible={cancelTripConfirmVisible}
+        onCancellationConfirmed={handleConfirmedCancellation}
+        handleCancelButton={handleCancelButton}
+      />
     </Modal>
   );
 };

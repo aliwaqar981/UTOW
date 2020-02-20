@@ -4,12 +4,17 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {height, totalSize, width} from 'react-native-dimension';
 
 import ApplicationStyles from '../../Themes/ApplicationStyles';
+import {CustomHeader} from '../../Components';
 import images from '../../Themes/Images';
 
 export const Settings = props => {
   const navigate = props.navigation.navigate;
   return (
     <View style={styles.container}>
+      <CustomHeader
+        title="Settings"
+        onPress={() => props.navigation.goBack()}
+      />
       <View style={styles.walletContainer}>
         <ListItem
           title={'Bobby'}
@@ -56,14 +61,13 @@ export const Settings = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: height(4),
     backgroundColor: '#F1F5F8',
-    justifyContent: 'space-between',
   },
   walletContainer: {
     backgroundColor: '#FFF',
     width: width(100),
     height: height(25),
+    marginTop: height(4),
   },
   signOutContainer: {
     backgroundColor: '#FFF',
@@ -71,6 +75,7 @@ const styles = StyleSheet.create({
     height: height(7),
     bottom: height(5),
     justifyContent: 'center',
+    position: 'absolute',
   },
   title: {
     fontSize: totalSize(2.4),

@@ -7,31 +7,37 @@ import {
   Thankyou,
   TruckArrive,
 } from '../../Components/';
-import {Image, Picker, Text, View} from 'react-native';
+import {Image, Picker, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import {height, totalSize, width} from 'react-native-dimension';
 
 import ApplicationStyles from '../../Themes/ApplicationStyles';
+import {DrawerActions} from 'react-navigation-drawer';
+import {Icon} from 'react-native-elements';
 import MapView from 'react-native-maps';
+import Modal from 'react-native-modal';
 import ModalDropdown from 'react-native-modal-dropdown';
+
+const services = ['JumpStart', 'Tow a Car', 'Lock Out', 'Low Fuel'];
 
 export const MapScreen = props => {
   // To save reason which service have been selected
-  const [selected, setSelected] = useState('Jump Start');
+  const [selected, setSelected] = useState('JumpStart');
   // To save reason why trip has been cancelled
   const [cancelReason, setCancelReason] = useState('');
+  const [dropDownVisible, setDropDownVisible] = useState(true);
   // States of all modals visibility
   const [arriveVisible, setArriveVisible] = useState(false);
   const [driverBookedVisible, setDriverBookedVisible] = useState(false);
-  const [driverDetailsVisible, setDriverDetailsVisible] = useState(true);
+  const [driverDetailsVisible, setDriverDetailsVisible] = useState(false);
   const [feedbackVisible, setFeedbackVisible] = useState(false);
   const [thankyouVisible, setThankyouVisible] = useState(false);
   const [cancelTripVisible, setcancelTripVisible] = useState(false);
-  const [cancelTripConfirmVisible, setCancelTripConfirmVisible] = useState(
-    false,
-  );
-  const handleSelected = (itemValue, itemIndex) => {
-    setSelected(itemValue);
+
+  const handleSelected = itemIndex => {
+    setSelected(services[itemIndex]);
+    setDriverDetailsVisible(!driverDetailsVisible);
+    setDropDownVisible(!dropDownVisible);
   };
 
   const handleDriverDetails = () => {
@@ -55,6 +61,7 @@ export const MapScreen = props => {
 
   const handleThankyou = () => {
     setThankyouVisible(!thankyouVisible);
+    setDropDownVisible(!dropDownVisible);
   };
 
   // Callback which will be called if user wants to cancel trip after booking
@@ -66,18 +73,41 @@ export const MapScreen = props => {
   // Callback to get reason which user selects during cancellation trip
   const handleDoneCancellation = reason => {
     setCancelReason(reason);
-    // setCancelTripConfirmVisible(!cancelTripConfirmVisible);
+    setcancelTripVisible(!cancelTripVisible);
+    setDropDownVisible(!dropDownVisible);
   };
 
-  // Callback triggered if trip cancellation confirmed
-  const handleConfirmedCancellation = () => {
-    setCancelTripConfirmVisible(!cancelTripConfirmVisible);
+  // Callback triggered if cross is clicked on cancel trip modal
+  const handleCrossButton = () => {
+    setcancelTripVisible(!cancelTripVisible);
+    setDriverBookedVisible(!driverBookedVisible);
   };
 
-  // Callback triggered if trip cancellation not confirmed
-  const handleNotConfirmedCancellation = () => {
-    setCancelTripConfirmVisible(!cancelTripConfirmVisible);
-    setCancelReason('');
+  const renderDropdown = () => {
+    return (
+      <View style={ApplicationStyles.cardStyles}>
+        <Text style={ApplicationStyles.h3}>Choose Your Service</Text>
+        <ModalDropdown
+          style={{
+            height: 40,
+            width: '90%',
+            marginTop: 8,
+            justifyContent: 'center',
+            backgroundColor: '#43bfc1',
+          }}
+          defaultValue="JumpStart"
+          defaultIndex={0}
+          textStyle={[ApplicationStyles.h3]}
+          dropdownStyle={{
+            width: '69%',
+            // height: 100,
+          }}
+          onSelect={handleSelected}
+          animated={true}
+          options={services}
+        />
+      </View>
+    );
   };
   return (
     <View style={ApplicationStyles.bgContainer}>
@@ -99,35 +129,7 @@ export const MapScreen = props => {
           />
         </MapView.Marker>
       </MapView>
-      {/* <View style={ApplicationStyles.cardStyles}>
-        <Text style={ApplicationStyles.h3}>Choose Your Service</Text>
-        <ModalDropdown
-          style={{
-            height: 40,
-            width: '90%',
-            marginTop: 8,
-            justifyContent: 'center',
-            backgroundColor: '#43bfc1',
-          }}
-          textStyle={[ApplicationStyles.h3]}
-          dropdownStyle={{
-            width: '69%',
-            // height: 100,
-          }}
-          animated={true}
-          options={[
-            'JumpStart',
-            'Tow a Car',
-            'Lock Out',
-            'Low Fuel',
-            'Tire Change',
-
-            'Lock Out',
-            'Low Fuel',
-            'Tire Change',
-          ]}
-        />
-      </View> */}
+      {dropDownVisible ? renderDropdown() : null}
       <TruckArrive
         visible={arriveVisible}
         handleArrivedVisibility={handleArrivedVisibility}
@@ -145,12 +147,26 @@ export const MapScreen = props => {
       />
       <Feedback visible={feedbackVisible} setVisible={handleFeedback} />
       <Thankyou visible={thankyouVisible} setVisible={handleThankyou} />
-      <CancelTrip visible={cancelTripVisible} onDone={handleDoneCancellation} />
-      <CancelTripConfirmation
-        visible={cancelTripConfirmVisible}
-        onCancellationConfirmed={handleConfirmedCancellation}
-        onCancellationNotConfirmed={handleNotConfirmedCancellation}
+      <CancelTrip
+        visible={cancelTripVisible}
+        onDone={handleDoneCancellation}
+        handleCrossButton={handleCrossButton}
       />
+      <View
+        style={{
+          position: 'absolute',
+          top: totalSize(3.5),
+          left: totalSize(3),
+          zIndex: 20,
+        }}>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.dispatch(DrawerActions.toggleDrawer())
+          }
+          style={{zIndex: 100}}>
+          <Icon name="menu" size={40} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

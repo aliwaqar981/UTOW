@@ -18,13 +18,14 @@ class HeaderBackButton extends Component {
         style={{
           alignItems: 'center',
           flexDirection: 'row',
-          marginHorizontal: width(5),
+          paddingHorizontal: width(4),
+          paddingVertical: 5,
         }}>
         <Icon
           name="ios-arrow-back"
           type="ionicon"
           color={colors.appTextColor1}
-          size={totalSize(2.5)}
+          size={totalSize(3.5)}
           iconStyle={{}}
         />
       </View>
