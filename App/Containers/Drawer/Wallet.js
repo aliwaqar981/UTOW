@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import {height, totalSize, width} from 'react-native-dimension';
 
 import ApplicationStyles from '../../Themes/ApplicationStyles';
+import {CustomHeader} from '../../Components';
 import images from '../../Themes/Images';
 
 const data = [{}, {}, {}];
@@ -11,6 +12,7 @@ export const Wallet = props => {
   const navigate = props.navigation.navigate;
   return (
     <View style={styles.container}>
+      <CustomHeader title="Wallet" onPress={() => props.navigation.goBack()} />
       <View style={styles.walletContainer}>
         <View style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
           <Image
@@ -30,7 +32,6 @@ export const Wallet = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: height(4),
     backgroundColor: '#F1F5F8',
   },
   walletContainer: {
@@ -40,6 +41,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: totalSize(6),
     paddingHorizontal: totalSize(3),
+    marginTop: height(4),
   },
   title: {
     fontSize: totalSize(3),
